@@ -1,6 +1,5 @@
 const { writeFile, readFile } = require('fs').promises
 
-// TODO arreglar los productos para que tengan que ver con mis gustos en el json
 class productosModel {
     constructor() {
         this.fileName = './src/models/productos.model.json'
@@ -26,7 +25,6 @@ class productosModel {
             return parsedProducts
         } catch (error) {
             const dataBase = {
-                nextId: 1,
                 productsList: []
             }
             this._saveProducts(dataBase)
@@ -34,11 +32,18 @@ class productosModel {
         }
     }
 
+    assignId = (productos) => {
+        let id = 1;
+        if (productos.length > 0) {
+          id = productos[productos.length - 1].id + 1;
+        }
+        return id;
+      };
+
     async createProduct(newProduct) {
         // TODO cambiar la manera de obtener el id
         const productsDB = await this._readProducts()
-        const id = productsDB.nextId
-        productsDB.nextId++
+        const id = this.assignId(productsDB.productsList);
         const timestamp = Date.now()
         const codigo = newProduct.nombre + timestamp
         newProduct.stock = newProduct.stock || 1

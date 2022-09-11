@@ -1,5 +1,5 @@
 const { writeFile, readFile } = require('fs').promises
-
+// TODO arreglar para que tenga que ver con mis gustos
 class carritosModel {
     constructor() {
         this.fileName = './src/models/carritos.model.json'

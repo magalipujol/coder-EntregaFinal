@@ -13,6 +13,7 @@ carritosRouter.post("/", async (req, res) => {
 })
 
 carritosRouter.post("/:id/productos", async (req, res) => {
+    // TODO obtener el id igual que en el de productos
     const cartId = parseInt(req.params.id)
     const { productId } = req.body
 
