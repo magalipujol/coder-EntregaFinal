@@ -33,14 +33,23 @@ class carritosModel {
         }
     }
 
+    assignId = (productos) => {
+        let id = 1;
+        if (productos.length > 0) {
+          id = productos[productos.length - 1].id + 1;
+        }
+        return id;
+      };
+
     async createNewCart() {
         const cartDB = await this._readCarts()
+        const id = this.assignId(cartDB.cartsList);
+        const timestamp = Date.now()
         const newCart = {
-            id: cartDB.nextId,
-            timestamp: Date.now(),
+            id: id,
+            timestamp: timestamp,
             productos: []
         }
-        cartDB.nextId++
         cartDB.cartsList.push(newCart)
         const wasCreated = await this._saveCarts(cartDB)
         if (wasCreated) {
@@ -49,6 +58,7 @@ class carritosModel {
         return false
     }
 
+    // TODO cambiar cantidad por stock
     async addProductToCart(cartId, productId) {
         const cartDB = await this._readCarts()
         const { cartsList } = cartDB
@@ -70,7 +80,39 @@ class carritosModel {
         }
         return false
     }
+
+    async deleteProductFromCart(cartId, productId) {
+        const cartDB = await this._readCarts()
+        const { cartsList } = cartDB
+        const cart = cartsList.find(cart => cart.id === cartId)
+
+        if (cart) {
+            const producto = cart.productos.find(producto => producto.productId === productId)
+            if (producto) {
+                const index = cart.productos.indexOf(producto)
+                cart.productos.splice(index, 1)
+                const wasSaved = await this._saveCarts(cartDB)
+                if (wasSaved) return cart.productos
+            }
+        }
+        return false
+    }
+
+    async deleteCart(cartId) {
+        const cartDB = await this._readCarts()
+        const { cartsList } = cartDB
+        const cart = cartsList.find(cart => cart.id === cartId)
+
+        if (cart) {
+            const index = cartsList.indexOf(cart)
+            cartsList.splice(index, 1)
+            const wasSaved = await this._saveCarts(cartDB)
+            if (wasSaved) return true
+        }
+        return false
+    }
 }
+
 
 module.exports = {
     carritosModel

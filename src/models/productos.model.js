@@ -41,7 +41,6 @@ class productosModel {
       };
 
     async createProduct(newProduct) {
-        // TODO cambiar la manera de obtener el id
         const productsDB = await this._readProducts()
         const id = this.assignId(productsDB.productsList);
         const timestamp = Date.now()

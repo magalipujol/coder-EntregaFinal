@@ -13,7 +13,6 @@ carritosRouter.post("/", async (req, res) => {
 })
 
 carritosRouter.post("/:id/productos", async (req, res) => {
-    // TODO obtener el id igual que en el de productos
     const cartId = parseInt(req.params.id)
     const { productId } = req.body
 
@@ -27,6 +26,46 @@ carritosRouter.post("/:id/productos", async (req, res) => {
         : res.status(500).send("No se pudo agregar el producto")
 })
 
+carritosRouter.get("/:id/productos", async (req, res) => {
+    const cartId = parseInt(req.params.id)
+
+    if (!cartId) {
+        return res.status(400).send("Faltan datos para completar la operacion")
+    }
+    const carts = await myCarts._readCarts()
+    const cart = carts.cartsList.find(cart => cart.id === cartId)
+
+    cart
+        ? res.json(cart)
+        : res.status(500).send("No se pudo obtener el carrito")
+})
+
+carritosRouter.delete("/:id/productos/:productId", async (req, res) => {
+    const cartId = parseInt(req.params.id)
+    const productId = parseInt(req.params.productId)
+
+    if (!cartId || !productId) {
+        return res.status(400).send("Faltan datos para completar la operacion")
+    }
+    const wasDeleted = await myCarts.deleteProductFromCart(cartId, productId)
+
+    wasDeleted
+        ? res.json(wasDeleted)
+        : res.status(500).send("No se pudo eliminar el producto")
+})
+
+carritosRouter.delete("/:id", async (req, res) => {
+    const cartId = parseInt(req.params.id)
+
+    if (!cartId) {
+        return res.status(400).send("Faltan datos para completar la operacion")
+    }
+    const wasDeleted = await myCarts.deleteCart(cartId)
+
+    wasDeleted
+        ? res.json(wasDeleted)
+        : res.status(500).send("No se pudo eliminar el carrito")
+})
 
 module.exports = {
     carritosRouter
