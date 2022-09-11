@@ -1,5 +1,6 @@
 const { writeFile, readFile } = require('fs').promises
 
+// TODO arreglar los productos para que tengan que ver con mis gustos en el json
 class productosModel {
     constructor() {
         this.fileName = './src/models/productos.model.json'
@@ -68,6 +69,9 @@ class productosModel {
         const { productsList } = productDB
         const product = productsList.find(product => product.id === productId)
 
+        // este chequeo sirve para que solo se modifiquen los campos que se envian
+        // si vienen propiedades extras, las va a crear
+        // TODO arreglar que las propiedades extras no se agreguen
         if (product) {
             Object.keys(newData).forEach(key => {
                 product[key] = newData[key]
