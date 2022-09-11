@@ -15,24 +15,13 @@ const productPostValidator = (req, res, next) => {
 };
 
 const validFieldsValidator = (req, res, next) => {
-  const camposValidos = [
-    "nombre",
-    "descripcion",
-    "foto",
-    "precio",
-    "stock",
-    "administrador",
-  ];
-
   if (Object.keys(req.body).every((key) => camposValidos.includes(key))) {
       next();
     } else {
-        // TODO estaría bueno que te diga que campos son los que están mal
+        const camposInvalidos = getDifferences(Object.keys(req.body), camposValidos);
     res
     .status(400)
-      .send(
-        "Los campos válidos son: nombre, descripcion,foto, precio, stock y administrador"
-        );
+      .send(`Campos inválidos. Los campos inválidos son: ${camposInvalidos.join(", ")}`);
     }
 };
 
