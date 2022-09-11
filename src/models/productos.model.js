@@ -35,16 +35,19 @@ class productosModel {
     }
 
     async createProduct(newProduct) {
+        // TODO cambiar la manera de obtener el id
         const productsDB = await this._readProducts()
         const id = productsDB.nextId
         productsDB.nextId++
         const timestamp = Date.now()
+        const codigo = newProduct.nombre + timestamp
         newProduct.stock = newProduct.stock || 1
 
         const completeNewProduct = {
             ...newProduct,
             id,
-            timestamp
+            timestamp,
+            codigo
         }
 
         productsDB.productsList.push(completeNewProduct)

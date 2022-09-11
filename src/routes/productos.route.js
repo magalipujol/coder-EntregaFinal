@@ -30,8 +30,6 @@ productosRouter.get("/:id?", (req, res) => {
             })
 
     }
-    // están hechos juntos el get para todos y el get por id
-    // TODO separarlos
     else {
         myProducts.getProducts()
             .then(data => res.json(data))
