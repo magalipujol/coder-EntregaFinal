@@ -1,4 +1,3 @@
-<!-- TODO completar -->
 # Proyecto final para curso de backend de Coderhouse
 
 ## Descripcion
