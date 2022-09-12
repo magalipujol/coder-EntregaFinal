@@ -1,5 +1,4 @@
 const { writeFile, readFile } = require('fs').promises
-// TODO arreglar para que tenga que ver con mis gustos
 class carritosModel {
     constructor() {
         this.fileName = './src/models/carritos.model.json'
@@ -25,7 +24,6 @@ class carritosModel {
             return parsedCarts
         } catch (error) {
             const dataBase = {
-                nextId: 1,
                 cartsList: []
             }
             this._saveCarts(dataBase)
@@ -58,20 +56,19 @@ class carritosModel {
         return false
     }
 
-    // TODO cambiar cantidad por stock
-    async addProductToCart(cartId, productId) {
+    async addProductToCart(cartId, productId, stock) {
         const cartDB = await this._readCarts()
         const { cartsList } = cartDB
         const cart = cartsList.find(cart => cart.id === cartId)
-
+// TODO si el producto ya está, debería actualizarse la cantidad
         if (cart) {
             const producto = cart.productos.find(producto => producto.productId === productId)
             if (producto) {
-                producto.cantidad++
+                producto.stock++
             } else {
                 const newProduct = {
                     productId,
-                    cantidad: 1
+                    stock: stock
                 }
                 cart.productos.push(newProduct)
             }

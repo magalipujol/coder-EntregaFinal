@@ -15,12 +15,12 @@ carritosRouter.post("/", async (req, res) => {
 
 carritosRouter.post("/:id/productos", async (req, res) => {
     const cartId = parseInt(req.params.id)
-    const { productId } = req.body
+    const { productId, stock } = req.body
 
     if (!cartId || !productId) {
         return res.status(400).send("Faltan datos para completar la operacion")
     }
-    const wasAdded = await myCarts.addProductToCart(cartId, productId)
+    const wasAdded = await myCarts.addProductToCart(cartId, productId, stock)
 
     wasAdded
         ? res.json(wasAdded)

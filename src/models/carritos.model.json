@@ -1,1 +1,1 @@
-{"nextId":1,"cartsList":[{"id":1,"timestamp":1662935960135,"productos":[{"productId":1,"cantidad":2}]}]}
+{"cartsList":[{"id":1,"timestamp":1662977689563,"productos":[{"productId":1,"stock":3},{"productId":2,"stock":12}]}]}
