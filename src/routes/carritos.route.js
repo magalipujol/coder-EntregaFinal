@@ -1,4 +1,5 @@
 const { Router } = require('express')
+// const { productoExisteValidator, productoRepetidoValidator } = require('../middlewares/carrito.middleware')
 const { carritosModel } = require('../models/carritos.model')
 const carritosRouter = Router()
 

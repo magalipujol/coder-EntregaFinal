@@ -1,1 +1,26 @@
-{"productsList":[{"administrador":true,"nombre":"pulpo","descripcion":"pulpo para paella!","foto":"https://www.poesiadefogon.com/wp-content/uploads/2022/01/paella-de-pulpo-asado-766x1024.jpg","precio":200,"stock":16,"id":1,"timestamp":1662924133392,"codigo":"pulpo1662924133392"},{"administrador":true,"descripcion":"pulpo para paella!","nombre":"juan","foto":"https://www.poesiadefogon.com/wp-content/uploads/2022/01/paella-de-pulpo-asado-766x1024.jpg","precio":200,"stock":16,"id":2,"timestamp":1662934757468,"codigo":"juan1662934757468"}]}
+{
+  "productsList": [
+    {
+      "administrador": true,
+      "nombre": "pulpo",
+      "descripcion": "pulpo para paella!",
+      "foto": "https://www.poesiadefogon.com/wp-content/uploads/2022/01/paella-de-pulpo-asado-766x1024.jpg",
+      "precio": 200,
+      "stock": 16,
+      "id": 1,
+      "timestamp": 1662924133392,
+      "codigo": "pulpo1662924133392"
+    },
+    {
+      "administrador": true,
+      "descripcion": "pulpo para paella!",
+      "nombre": "juan",
+      "foto": "https://www.poesiadefogon.com/wp-content/uploads/2022/01/paella-de-pulpo-asado-766x1024.jpg",
+      "precio": 200,
+      "stock": 16,
+      "id": 2,
+      "timestamp": 1662934757468,
+      "codigo": "juan1662934757468"
+    }
+  ]
+}
